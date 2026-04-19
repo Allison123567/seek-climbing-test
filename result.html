@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>你的攀岩人格结果</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family: "PingFang SC", "Microsoft YaHei", sans-serif;}
+body{background:#ffffff;color:#222;padding:30px 24px;}
+.container{max-width:500px;margin:0 auto;text-align:center;}
+/* 调整后：图片变小，居中 */
+.boss-img{width:60%;border-radius:12px;margin:10px auto 15px;display:block;object-fit:cover;}
+.tag{font-size:36px;font-weight:900;margin-top:20px;margin-bottom:8px;}
+.en-tag{font-size:20px;color:#b89b7e;letter-spacing:2px;margin-bottom:20px;}
+.desc-top{font-size:17px;color:#444;line-height:1.9;margin-bottom:35px;}
+.card{background:#f8f8f8;border-radius:16px;padding:24px;text-align:left;}
+.card-title{font-size:16px;font-weight:600;margin-bottom:15px;}
+.card-text{font-size:15px;color:#555;line-height:2;}
+.back-btn{display:inline-block;margin-top:50px;background:#111;color:#fff;padding:14px 45px;border-radius:50px;text-decoration:none;font-size:15px;}
+</style>
+</head>
+<body>
+<div class="container">
+    <div id="res"></div>
+    <a class="back-btn" href="index.html">重新检测</a>
+</div>
+
+<script>
+const t = new URLSearchParams(location.search).get("t");
+const data = {
+    A:{
+        title:"陆老板",
+        en:"BOSS · SK",
+        top:"石刻岩馆的氛围掌控者，岩壁之下的幽默赢家",
+        img:"boss.jpg", // 确保你的图片叫这个名字，且和html文件同目录
+        txt:"你是石刻攀岩馆的核心灵魂，常年静坐馆内办公，随性潇洒自带笑点。金句频出，一句「我让你看看什么叫做一把」成为专属招牌。实力藏于玩笑之中，用松弛的姿态，撑起整座岩馆的趣味底色。"
+    },
+    B:{
+        title:"超绝小孩哥/姐",
+        en:"LIT · KID",
+        top:"小巧身躯藏猛兽，无限续航的攀爬天才",
+        txt:"身形娇小看着瘦弱，躯体之内却蕴藏爆表肌肉与强悍耐力。速度攀碾压全场，高难度线路轻松拿捏，连续攀爬不知疲惫。看似弱小的外表下，是岩壁上最具爆发力的超强选手。"
+    },
+    C:{
+        title:"石刻大魔王",
+        en:"PRO · KING",
+        top:"专业运动员水准，岩馆难度线的绝对统治者",
+        txt:"石刻本土攀岩运动员，拥有断层级顶尖技术。馆内所有线路对你而言皆是基础难度，动作标准丝滑，发力精准利落。清冷低调，不靠言语张扬，仅凭硬核实力，坐稳岩馆实力天花板。"
+    },
+    D:{
+        title:"佛系划水人",
+        en:"CHILL · MODE",
+        top:"拒绝攀爬内卷，把摸鱼松弛贯彻到底",
+        txt:"你是岩馆经典的休闲选手，攀爬节奏随心所欲。爬完一条线便长久休息，闲逛唠嗑、零食解馋、发呆放空。从不主动上墙，永远需要旁人催促，在慢节奏里，享受攀岩最松弛的模样。"
+    },
+    E:{
+        title:"暖心热心岩友",
+        en:"HELP · WARM",
+        top:"岩壁摆渡人，新人最靠谱的引路者",
+        txt:"天生温柔耐心，是石刻岩馆的常驻善意担当。主动为新人拆解线路、分享专属Beta、纠正错误动作。乐于互帮互助，用心维系岩友氛围，用细致的讲解与包容，温暖每一位攀爬新手。"
+    },
+    F:{
+        title:"执念磕线人",
+        en:"TRY · HARD",
+        top:"嘴硬倔强选手，单线死磕的忠实爱好者",
+        txt:"认准一条线路便执着到底，习惯立下离谱flag，扬言不过线绝不睡觉。反复打磨动作，屡败屡战绝不摆烂。自带搞笑反差，嘴上狠话不断，行动踏实努力，是岩馆最可爱的坚持派。"
+    },
+    G:{
+        title:"默默陪伴者",
+        en:"WAIT · CALM",
+        top:"岩壁下的安静守候，无声温柔的同行人",
+        txt:"你是陪同孩子的家长，或是相伴而来的亲友。不参与攀爬角逐，不追求难度突破，只静静伫立台下，轻声加油、长久等候。以无声的陪伴为内核，低调温柔，成为攀岩场最安静的治愈存在。"
+    }
+};
+const d = data[t];
+
+// 关键修改：图片放在「陆老板」标题下方
+let imgHtml = d.img ? `<img class="boss-img" src="${d.img}" alt="陆老板">` : "";
+
+document.getElementById("res").innerHTML = `
+<div class="tag">${d.title}</div>
+${imgHtml}
+<div class="en-tag">${d.en}</div>
+<div class="desc-top">${d.top}</div>
+<div class="card">
+    <div class="card-title">人格解读：</div>
+    <div class="card-text">${d.txt}</div>
+</div>
+`;
+</script>
+</body>
+</html>

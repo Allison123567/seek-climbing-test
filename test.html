@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>测试中</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family: "PingFang SC", sans-serif;}
+body{background:#fff;color:#222;padding:30px 20px;}
+.wrap{max-width:520px;margin:0 auto;}
+.question{font-size:18px;font-weight:500;margin:40px 0 35px;line-height:1.8;}
+.opt{width:100%;background:#f5f5f5;border:none;border-radius:12px;padding:18px 20px;margin-bottom:14px;text-align:left;font-size:15px;color:#333;cursor:pointer;transition:0.2s;}
+.opt:hover{background:#eeeeee;}
+</style>
+</head>
+<body>
+<div class="wrap">
+    <div id="qBox"></div>
+</div>
+
+<script>
+const questions = [
+    {q:"在石刻岩馆，你的常驻状态是？",opts:["坐在工位办公，随口整活搞笑","身形小巧，攀爬续航拉满","技术顶尖，馆内线路随便拿捏","爬完就摆烂，发呆闲聊摸鱼"]},
+    {q:"面对难点线路，你的第一反应？",opts:["随口放话，一把轻松拿下","轻松速攀，全程毫不费力","动作丝滑，专业碾压通关","躺平休息，等会儿再说"]},
+    {q:"休息空档你会做什么？",opts:["守店办公，顺便活跃全场氛围","短暂休整，随时继续上墙攀爬","冷静复盘，维持专业攀爬状态","零食唠嗑，盯着线路放空发呆"]},
+    {q:"遇见新手不会爬线时？",opts:["随手示范，简单拿捏动作细节","快速爬完，用动作直观展示技巧","精准拆解，给出专业发力建议","主动上前，耐心讲解线路Beta"]},
+    {q:"一条线路反复爬不过，你会？",opts:["调侃作罢，换条线路轻松游玩","耐力充足，多尝试几次慢慢突破","实力在线，调整动作轻松攻克","嘴硬立flag，不过线绝不回家"]},
+    {q:"你来攀岩的核心意义？",opts:["打理岩馆，忙于日常工作顺便","享受攀爬，释放浑身充沛体力","保持训练，稳固自身竞技水平","陪伴亲友，安静坐在台下等候"]}
+];
+
+let score = {A:0,B:0,C:0,D:0,E:0,F:0,G:0};
+let now = 0;
+const map = ["A","B","C","D"];
+const qBox = document.getElementById("qBox");
+
+function render(){
+    const d = questions[now];
+    let html = `<div class="question">${now+1}. ${d.q}</div>`;
+    d.opts.forEach((item,i)=>{
+        html += `<button class="opt" onclick="choose('${map[i]}')">${item}</button>`;
+    });
+    qBox.innerHTML = html;
+}
+
+window.choose = function(k){
+    // 选项对应人格分流
+    if(now===3 && k==="D") score.E++;
+    else if(now===4 && k==="D") score.F++;
+    else if(now===5 && k==="D") score.G++;
+    else score[k]++;
+
+    now++;
+    now >= questions.length ? submit() : render();
+}
+function submit(){
+    let maxKey = Object.keys(score).sort((a,b)=>score[b]-score[a])[0];
+    location.href = `result.html?t=${maxKey}`;
+}
+render();
+</script>
+</body>
+</html>
